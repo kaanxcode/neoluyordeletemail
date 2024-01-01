@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      form {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="myForm">
+      <br />
+      <label for="textInput">Ne Oluyor App</label>
+      <br />
+      <br />
+      <img src="logo.png" alt="Logo" width="100" />
+      <br />
+      <br />
+      <label for="textInput">SİLİNMESİNİ İSTEDİĞİNİZ EPOSTAYI YAZIN</label>
+      <br />
+      <br />
+      <input type="email" id="textInput" name="textInput" />
+      <br />
+      <br />
+      <input type="button" value="Gönder" onclick="submitForm()" />
+    </form>
+
+    <script>
+      function submitForm() {
+        var textInput = document.getElementById("textInput").value;
+
+        // Basit bir kontrol: Eğer metin girişi yoksa, uyarı ver ve işlemi sonlandır.
+        if (!textInput) {
+          alert("Lütfen bir metin girin.");
+          return;
+        }
+
+        // Dosyaya yazma işlemi
+        var blob = new Blob([textInput], { type: "text/plain;charset=utf-8" });
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "kayitlar.txt";
+        a.click();
+
+        alert(
+          "Kayıt başarıyla oluşturuldu. Hesap 24 saat içinde silinecektir."
+        );
+      }
+    </script>
+  </body>
+</html>
